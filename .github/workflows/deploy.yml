@@ -1,0 +1,21 @@
+name: Deploying angular app to S3 and CloudFront
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build Angular App
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "23"
+      - name: Install packages and dependencies
+        run: pnpm install -g @angular/cli && pnpm install
+
+      - name: Run build
+        run: pnpm run build
