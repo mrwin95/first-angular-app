@@ -20,6 +20,7 @@ jobs:
           pnpm setup
           echo "PNPM_HOME=$HOME/.local/share/pnpm" >> $GITHUB_ENV
           echo "$HOME/.local/share/pnpm" >> $GITHUB_PATH
+          echo "SHELL=/bin/bash" >> $GITHUB_ENV
           pnpm install -g @angular/cli && pnpm install
 
       - name: Run build
