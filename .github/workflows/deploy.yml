@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: "23"
       - name: Install packages and dependencies
-        run: pnpm install -g @angular/cli && pnpm install
+        run: npm install -g pnpm && pnpm install -g @angular/cli && pnpm install
 
       - name: Run build
         run: pnpm run build
