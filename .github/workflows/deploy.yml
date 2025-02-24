@@ -15,7 +15,12 @@ jobs:
         with:
           node-version: "23"
       - name: Install packages and dependencies
-        run: npm install -g pnpm && export PATH=$PATH:$(npm bin -g) && pnpm install -g @angular/cli && pnpm install
+        run: |
+          npm install -g pnpm
+          pnpm setup
+          echo "PNPM_HOME=$HOME/.local/share/pnpm" >> $GITHUB_ENV
+          echo "$HOME/.local/share/pnpm" >> $GITHUB_PATH
+          pnpm install -g @angular/cli && pnpm install
 
       - name: Run build
         run: pnpm run build
