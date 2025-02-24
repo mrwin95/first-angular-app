@@ -18,13 +18,20 @@ jobs:
         run: |
           echo $SHELL
           echo "SHELL=/bin/bash" >> $GITHUB_ENV
+          export SHELL=/bin/bash
 
-      - name: Install packages and dependencies
+      - name: Setup pnpm
         run: |
           npm install -g pnpm
           pnpm setup
-          echo "PNPM_HOME=$HOME/.local/share/pnpm" >> $GITHUB_ENV
+          echo 'export PNPM_HOME=$HOME/.local/share/pnpm' >> $GITHUB_ENV
           echo "$HOME/.local/share/pnpm" >> $GITHUB_PATH
+          echo 'export PATH=$PNPM_HOME:$PATH' >> ~/.bashrc
+          source ~/.bashrc
+
+      - name: Install packages and dependencies
+        run: |
+          pnpm -v
           pnpm install -g @angular/cli && pnpm install
 
       - name: Run build
